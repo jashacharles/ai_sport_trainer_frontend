@@ -1,9 +1,7 @@
-/*
-
-client id
-project id
-project name 
-sport type 
-goal 
-
-*/
+export interface Project {
+  clientId: string;
+  projectId: string;
+  projectName: string;
+  sportType: string;
+  goal: string;
+}

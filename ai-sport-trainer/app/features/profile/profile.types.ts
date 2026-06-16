@@ -1,12 +1,9 @@
-/*
-
-email
-userId
-user name 
-password
-weight 
-height
-age
-
-
-*/
+export interface Profile {
+  email: string;
+  userId: string;
+  userName: string;
+  password: string;
+  weight: number;
+  height: number;
+  age: number;
+}

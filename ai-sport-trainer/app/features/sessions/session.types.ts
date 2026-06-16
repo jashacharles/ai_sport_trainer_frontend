@@ -2,30 +2,17 @@ export type SessionStatus = "pending" | "processing" | "completed" | "failed";
 
 export interface AIFeedback {
   summary: string;
-  strengths: string[];
-  improvements: string[];
-  score: number;
+  recommendations: string[];
 }
 
 export interface Session {
-  id: string;
   projectId: string;
+  sessionId: string;
   name: string;
   description: string;
-  fileUrl: string;
   status: SessionStatus;
   feedback: AIFeedback | null;
   createdAt: string;
   updatedAt: string;
 }
 
-export interface CreateSessionRequest {
-  name: string;
-  description: string;
-  file: File;
-}
-
-export interface UpdateSessionRequest {
-  name?: string;
-  description?: string;
-}
