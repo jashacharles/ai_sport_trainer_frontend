@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Home() {
   const handleLogin = async () => {
-    await fetch("http://localhost:3000");
+    await fetch("http://localhost:3001");
   };
 
   return (
@@ -16,7 +16,7 @@ export default function Home() {
         Login
       </button>
       <Link
-        href="/pages/authentication/create_user"
+        href="/authentication/create_user"
         className="flex h-12 w-48 items-center justify-center rounded-full border border-black font-medium hover:bg-zinc-100 transition-colors"
       >
         Create User
