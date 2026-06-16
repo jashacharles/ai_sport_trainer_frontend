@@ -1,0 +1,4 @@
+/*
+
+similar to project list but shows sessions instead of projects
+*/

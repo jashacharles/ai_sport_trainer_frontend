@@ -1,0 +1,5 @@
+/*
+just a list that holds project cards 
+
+with a add session button at the bottom that opens a form to create a new session
+*/

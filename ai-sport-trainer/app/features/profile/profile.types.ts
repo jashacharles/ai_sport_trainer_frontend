@@ -1,0 +1,12 @@
+/*
+
+email
+userId
+user name 
+password
+weight 
+height
+age
+
+
+*/

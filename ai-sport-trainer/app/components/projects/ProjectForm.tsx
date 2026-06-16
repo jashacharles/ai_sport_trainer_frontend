@@ -1,0 +1,10 @@
+/*
+a form 
+
+project name 
+sport type 
+goal 
+
+at the bottom a submit button that send request to backend to create project 
+
+*/
