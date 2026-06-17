@@ -1,7 +1,7 @@
 import { apiClient } from "@/app/lib/api-client";
-import { Profile } from "./profile.types";
+import { Profile, CreateProfileInput } from "./profile.types";
 
-export function createProfile(data: Profile): Promise<Profile> {
+export function createProfile(data: CreateProfileInput): Promise<Profile> {
   console.log("Creating profile with data:", data);
   return apiClient.post<Profile>("/user", data);
 }

@@ -15,17 +15,15 @@ export default function SessionList({ sessions }: SessionListProps) {
   return (
     <div className="flex flex-col gap-3 w-full">
       {sessions.map((session) => (
-        <SessionCard key={session.id} session={session} />
+        <SessionCard key={session.sessionId} session={session} />
       ))}
 
       {showAddSession && (
-        <div className="mt-2">
-          <AddSessionModal />
-        </div>
+        <AddSessionModal onClose={() => setShowAddSession(false)} />
       )}
 
       <button
-        onClick={() => setShowAddSession((prev) => !prev)}
+        onClick={() => setShowAddSession(true)}
         className="mt-2 w-full py-2 text-sm font-medium text-zinc-600 border border-dashed border-zinc-300 rounded-xl hover:border-zinc-500 hover:text-zinc-800 transition-colors"
       >
         + Add Session

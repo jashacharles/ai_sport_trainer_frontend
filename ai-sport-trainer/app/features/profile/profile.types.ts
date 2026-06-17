@@ -1,4 +1,5 @@
 export interface Profile {
+  id: string;
   email: string;
   userName: string;
   password: string;
@@ -6,3 +7,5 @@ export interface Profile {
   height: number;
   age: number;
 }
+
+export type CreateProfileInput = Omit<Profile, 'id'>

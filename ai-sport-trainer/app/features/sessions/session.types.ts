@@ -16,3 +16,5 @@ export interface Session {
   updatedAt: string;
 }
 
+export type CreateSessionInput = Omit<Session, 'sessionId' | 'feedback' | 'createdAt' | 'updatedAt'>
+

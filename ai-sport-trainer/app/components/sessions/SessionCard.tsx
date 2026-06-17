@@ -22,9 +22,9 @@ export default function SessionCard({ session }: SessionCardProps) {
         <div className="flex flex-col gap-2 border-t border-zinc-100 pt-3">
           <p className="text-xs font-semibold text-zinc-500 uppercase tracking-wide">AI Recommendations</p>
           <p className="text-sm text-zinc-700">{session.feedback.summary}</p>
-          {session.feedback.improvements.length > 0 && (
+          {session.feedback.recommendations.length > 0 && (
             <ul className="list-disc list-inside text-sm text-zinc-600 flex flex-col gap-1">
-              {session.feedback.improvements.map((item, i) => (
+              {session.feedback.recommendations.map((item, i) => (
                 <li key={i}>{item}</li>
               ))}
             </ul>

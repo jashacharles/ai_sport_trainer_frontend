@@ -1,9 +1,12 @@
-import AddSessionModal from "@/app/components/sessions/AddSessionModal";
+import ProjectList from "@/app/components/projects/ProjectList";
 
-export default function ViewProjectsPage() {
+export default function ProjectsPage() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-8">
-      <AddSessionModal />
+    <div className="flex flex-col items-center min-h-screen p-8">
+      <div className="w-full max-w-2xl">
+        <h1 className="text-3xl font-bold text-zinc-800 mb-6">Projects</h1>
+        <ProjectList projects={[]} />
+      </div>
     </div>
   );
 }
