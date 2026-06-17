@@ -4,6 +4,7 @@ import Link from "next/link";
 
 export default function Home() {
   const handleLogin = async () => {
+    console.log("Login button clicked");
     await fetch("http://localhost:3001");
   };
 
