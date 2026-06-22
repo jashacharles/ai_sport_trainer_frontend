@@ -1,7 +1,12 @@
 import { apiClient } from "@/app/lib/api-client";
 import { Project, CreateProjectInput } from "./project.types";
 
+export function getProjects(): Promise<Project[]> {
+  const token = sessionStorage.getItem("access_token") ?? "";
+  return apiClient.get<Project[]>("/projects", token);
+}
+
 export function createProject(data: CreateProjectInput): Promise<Project> {
-  console.log("Creating project with data:", data);
-  return apiClient.post<Project>("/project", data);
+  const token = sessionStorage.getItem("access_token") ?? "";
+  return apiClient.post<Project>("/projects", data, token);
 }

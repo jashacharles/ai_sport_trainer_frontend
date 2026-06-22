@@ -1,16 +1,48 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { attemptLogin } from "@/app/features/auth/auth.api";
+import { getProjects } from "@/app/features/projects/project.api";
+
 export default function LoginForm() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+    try {
+      const result = await attemptLogin({ email, password });
+      console.log("Login successful, received result:", result);
+
+      sessionStorage.setItem("access_token", result.access_token);
+      sessionStorage.setItem("client", JSON.stringify(result.client));
+      sessionStorage.setItem("projects", JSON.stringify(result.projects));
+      router.push("/projects");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Login failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="flex flex-col gap-6 w-full max-w-md">
       <h2 className="text-2xl font-bold text-zinc-800">Login</h2>
 
-      <form className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
           <label className="text-sm font-medium text-zinc-700">Email</label>
           <input
             type="email"
             placeholder="you@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="border border-zinc-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-400"
           />
         </div>
@@ -20,15 +52,20 @@ export default function LoginForm() {
           <input
             type="password"
             placeholder="••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="border border-zinc-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-400"
           />
         </div>
 
+        {error && <p className="text-sm text-red-500">{error}</p>}
+
         <button
           type="submit"
-          className="bg-zinc-800 text-white rounded-lg py-2 text-sm font-semibold hover:bg-zinc-700 transition-colors"
+          disabled={loading}
+          className="bg-zinc-800 text-white rounded-lg py-2 text-sm font-semibold hover:bg-zinc-700 transition-colors disabled:opacity-50"
         >
-          Login
+          {loading ? "Logging in..." : "Login"}
         </button>
       </form>
 

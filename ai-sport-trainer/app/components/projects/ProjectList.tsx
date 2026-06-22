@@ -2,21 +2,29 @@
 
 import { useState } from "react";
 import { Project } from "@/app/features/projects/project.types";
+import { getProjects } from "@/app/features/projects/project.api";
 import ProjectCard from "./ProjectCard";
 import ProjectForm from "./ProjectForm";
 
 interface ProjectListProps {
   projects: Project[];
+  onProjectsUpdated: (projects: Project[]) => void;
 }
 
-export default function ProjectList({ projects }: ProjectListProps) {
+export default function ProjectList({ projects, onProjectsUpdated }: ProjectListProps) {
   const [showAddProject, setShowAddProject] = useState(false);
+
+  const handleProjectCreated = async () => {
+    const updated = await getProjects();
+    onProjectsUpdated(updated);
+    setShowAddProject(false);
+  };
 
   return (
     <div className="flex flex-col gap-3 w-full">
       {projects.map((project) => (
         <ProjectCard
-          key={project.projectId}
+          key={project.id}
           project={project}
           onViewDetails={(id) => console.log("view", id)}
         />
@@ -31,7 +39,7 @@ export default function ProjectList({ projects }: ProjectListProps) {
             >
               ✕
             </button>
-            <ProjectForm />
+            <ProjectForm onSuccess={handleProjectCreated} />
           </div>
         </div>
       )}
