@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Session } from "@/app/features/sessions/session.types";
+import { getSessions } from "@/app/features/sessions/session.api";
 import SessionCard from "./SessionCard";
 import AddSessionModal from "./AddSessionModal";
 
@@ -14,13 +15,10 @@ export default function SessionList({ projectId, sessions: initialSessions }: Se
   const [sessions, setSessions] = useState<Session[]>(initialSessions);
   const [showAddSession, setShowAddSession] = useState(false);
 
-  const handleSessionCreated = (session: Session) => {
-    setSessions((prev) => {
-      const updated = [...prev, session];
-      sessionStorage.setItem(`sessions_${projectId}`, JSON.stringify(updated));
-      return updated;
-    });
+  const handleSessionCreated = async () => {
     setShowAddSession(false);
+    const updated = await getSessions(projectId);
+    setSessions(updated);
   };
 
   return (
@@ -33,7 +31,7 @@ export default function SessionList({ projectId, sessions: initialSessions }: Se
         <AddSessionModal
           projectId={projectId}
           onClose={() => setShowAddSession(false)}
-          onSuccess={handleSessionCreated}
+          onSuccess={() => handleSessionCreated()}
         />
       )}
 

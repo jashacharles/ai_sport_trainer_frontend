@@ -35,9 +35,20 @@ async function post<T>(path: string, body: unknown, token?: string): Promise<T> 
   return data;
 }
 
+async function put(url: string, body: BodyInit, contentType: string, token?: string): Promise<void> {
+  const headers: Record<string, string> = { "Content-Type": contentType };
+  if (token) headers["Authorization"] = `Bearer ${token}`;
+  const res = await fetch(url, { method: "PUT", headers, body });
+  if (!res.ok) {
+    const error = await res.text();
+    throw new Error(error || `Request failed with status ${res.status}`);
+  }
+}
+
 export const apiClient = {
   get,
   post,
+  put,
   createProfile: (data: CreateProfileInput) => post<Profile>("/profiles", data),
   createProject: (data: CreateProjectInput) => post<Project>("/projects", data),
   createSession: (data: CreateSessionInput) => post<Session>("/sessions", data),

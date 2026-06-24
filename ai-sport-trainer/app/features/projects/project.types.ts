@@ -7,4 +7,6 @@ export interface Project {
   goal: string;
 }
 
+
+
 export type CreateProjectInput = Omit<Project, 'id' | 'clientId' | 'projectId'>
